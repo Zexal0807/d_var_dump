@@ -41,9 +41,13 @@ function _v($arr, $p){
 			break;
 		case "array":
 			echo "Array(".sizeof($arr).") {\r\n";
-			for($i = 0; $i < sizeof($arr); $i++){
-				echo $p."\t"."[".$i."] => ";
-				_v($arr[$i], $p."\t");
+			foreach($arr as $k => $v){
+				if(gettype($k) == "string"){
+					echo $p."\t".'["'.$k.'"] => ';
+				}else{
+					echo $p."\t"."[".$k."] => ";
+				}
+				_v($v, $p."\t");
 				echo "\r\n";
 			}
 			echo $p."}";
